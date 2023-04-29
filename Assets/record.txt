@@ -1,0 +1,12 @@
+FristDay:
+Design base gameplay logic.
+Use kenney model asset built a town to play.
+Finish base function.
+
+Second:
+Add client animation.
+Add play scene ui.
+Add scene special effect.
+Update menu&select scene ui.
+Build a new play scene.
+
