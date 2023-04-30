@@ -6,7 +6,13 @@ Finish base function.
 Second:
 Add client animation.
 Add play scene ui.
-Add scene special effect.
+Add prop.
+Update shoot funcation.
+
+Third:
 Update menu&select scene ui.
 Build a new play scene.
+Add Audio.
+Fix Bug.
+Pack game.
 

@@ -29,7 +29,7 @@ public class GenerateClient : MonoBehaviour
 		if (IsVisable && !m_client && (Time.realtimeSinceStartup - timer) > m_generateCD)
 		{
 			
-			timer = m_generateCD;
+			timer = Time.realtimeSinceStartup;
 			switch (Type)
 			{
 				case ClientType.OnGround:

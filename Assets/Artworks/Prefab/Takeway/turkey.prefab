@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539aaf2d5dc41be4f820a44a63704f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaunchThrust: 5000
+  LaunchThrust: 3000
   DeliveryEffectPrefab: {fileID: 2236466852268615598, guid: 893c9223acbce284389aeb2cd5d432ae,
     type: 3}
   DisappearEffectPrefab: {fileID: 2236466852268615598, guid: 5a3fca2d957a3114c9040bac20371a7c,

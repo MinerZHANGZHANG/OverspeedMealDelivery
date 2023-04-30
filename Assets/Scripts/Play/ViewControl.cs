@@ -6,13 +6,8 @@ public class ViewControl : MonoBehaviour
 {
 	public float mouseSensitivity = 100f;
 
-	private Camera m_camera;
 	private float m_xRotation = 0f;
 	private float m_yRotation = 0f;
-	void Start()
-    {
-        m_camera= Camera.main;
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,14 +22,6 @@ public class ViewControl : MonoBehaviour
 		m_yRotation= Mathf.Clamp(m_yRotation, -45f, 45f);
 
 		transform.localRotation = Quaternion.Euler(m_xRotation, m_yRotation, 0f);
-
-		if (Input.GetKey(KeyCode.Tab))
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-        else
-        {
-			Cursor.lockState = CursorLockMode.Locked;
-		}
+		
 	}
 }

@@ -17,12 +17,28 @@ public class Client : MonoBehaviour
 			item.material.mainTexture= randomTexture;
 		}
 
+		Invoke(nameof(SetToGround), 0.1f);
 		tag = "Client";
+	}
+
+
+	private void SetToGround()
+	{
+		if (transform.parent.GetComponent<GenerateClient>().Type == GenerateClient.ClientType.OnGround)
+		{
+			//Debug.Log(transform.position);
+			//Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000f, Color.red, 1000f);
+			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit raycastHit, 100f))
+			{
+				transform.position = raycastHit.point - Vector3.up * 0.1f;
+				//Debug.Log($"new position:{transform.position}");
+			}
+		}
 	}
 
 	private void OnDestroy()
 	{
-		ScoreManager.AddScore(ScoreManager.ScoreSource.DeliveryFood, 100);
+		
 		GenerateManager.ClientCount--;
 		foreach (var item in m_skinnedMeshRenderersInChildren)
 		{

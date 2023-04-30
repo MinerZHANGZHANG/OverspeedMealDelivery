@@ -7,8 +7,10 @@ public class CarControl : MonoBehaviour
     public float AdvanceForce = 2000f;
     public float RotateForce = 10f;
     private Rigidbody m_rigidbody;
+    private float m_baseForce;
     void Start()
     {
+        m_baseForce = AdvanceForce;
         m_rigidbody= GetComponent<Rigidbody>();
     }
 
@@ -43,5 +45,29 @@ public class CarControl : MonoBehaviour
 				}
 			}
 		}
+    }
+
+    public void CarSpeedUp()
+    {
+        StartCoroutine(UpSpeed());
+    }
+
+    IEnumerator UpSpeed()
+    {
+        AdvanceForce += 1000f;
+        while (Camera.main.fieldOfView < 70)
+        {
+            Camera.main.fieldOfView += Time.deltaTime * 10f;
+            yield return null;
+                
+		}     
+        yield return new WaitForSeconds(13f);
+		while (Camera.main.fieldOfView > 60)
+		{
+			Camera.main.fieldOfView -= Time.deltaTime * 10f;
+			yield return null;
+
+		}
+		AdvanceForce -= 1000f;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ZoomEffect : MonoBehaviour,IPointerEnterHandler
+public class ZoomEffect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
 	[Header("·Å´ó±¶ÂÊ")]
 	[SerializeField]

@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Takeway : MonoBehaviour
 {
-	public float LaunchThrust=10000f;
 	public GameObject DeliveryEffectPrefab;
 	public GameObject DisappearEffectPrefab;
 	private bool m_isDisappearing=false;
@@ -14,7 +12,6 @@ public class Takeway : MonoBehaviour
 	private void Start()
 	{
 		Destroy(gameObject,10f);
-		GetComponent<Rigidbody>().AddForce(LaunchThrust * transform.forward);
 	}
 
 
@@ -25,7 +22,7 @@ public class Takeway : MonoBehaviour
 			m_isDisappearing = true;
 			var effect= Instantiate(DeliveryEffectPrefab);
 			effect.transform.position=transform.position;
-
+			ScoreManager.AddScore(ScoreManager.ScoreSource.DeliveryFood, 80);			
 			Destroy(collision.collider.gameObject);
 			Destroy(gameObject);
 		}
@@ -43,10 +40,12 @@ public class Takeway : MonoBehaviour
 	IEnumerator DestorySelf()
 	{		
 		yield return new WaitForSeconds(3f);
-		transform.DOScale(0.1f, 1f);
+		//var tweener= transform.DOScale(0.1f, 1f);
 		var effect = Instantiate(DisappearEffectPrefab);
 		effect.transform.position = transform.position;
 		yield return new WaitForSeconds(1.1f);
+		//tweener.Kill();
+		ScoreManager.ReduceScore(ScoreManager.ScoreSource.LoseFood,2);
 		Destroy(gameObject);
 	}
 }
