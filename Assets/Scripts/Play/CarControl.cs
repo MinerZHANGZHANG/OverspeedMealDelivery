@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
+    public AudioSource RunAudioSource;
     public float AdvanceForce = 2000f;
     public float RotateForce = 10f;
     private Rigidbody m_rigidbody;
@@ -17,14 +17,17 @@ public class CarControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PauseGame.IsPause) return;
         if(Input.anyKey)
         {
             if(Input.GetKey(KeyCode.W))
             {
-                m_rigidbody.AddForce(AdvanceForce*Time.deltaTime*transform.forward);
+				RunAudioSource.Play();
+				m_rigidbody.AddForce(AdvanceForce*Time.deltaTime*transform.forward);
             }
 			if (Input.GetKey(KeyCode.S))
             {
+				RunAudioSource.Play();
 				m_rigidbody.AddForce(AdvanceForce* Time.deltaTime * -transform.forward);
 			}
             if(Input.GetKey(KeyCode.A)) 
@@ -55,9 +58,9 @@ public class CarControl : MonoBehaviour
     IEnumerator UpSpeed()
     {
         AdvanceForce += 1000f;
-        while (Camera.main.fieldOfView < 70)
+        while (Camera.main.fieldOfView < 75)
         {
-            Camera.main.fieldOfView += Time.deltaTime * 10f;
+            Camera.main.fieldOfView += Time.deltaTime * 15f;
             yield return null;
                 
 		}     

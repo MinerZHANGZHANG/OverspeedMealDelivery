@@ -19,6 +19,7 @@ public class Client : MonoBehaviour
 
 		Invoke(nameof(SetToGround), 0.1f);
 		tag = "Client";
+		//Debug.Log(transform.position);
 	}
 
 
@@ -38,7 +39,7 @@ public class Client : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		
+
 		GenerateManager.ClientCount--;
 		foreach (var item in m_skinnedMeshRenderersInChildren)
 		{

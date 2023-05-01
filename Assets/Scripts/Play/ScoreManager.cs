@@ -6,8 +6,18 @@ using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
+    public enum VictioryType 
+    {
+        DeliveryNumber,
+        DeliveryPosition,
+    }
+    public VictioryType VictoryConditions;
+
     public int TargetDeliveryNumber = 25;
-    [Header("Game Info UI")]
+
+	public Transform TargetDeliveryPosiition;
+	public Transform PlayerTransfrom;
+	[Header("Game Info UI")]
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI TimeText;
     public TextMeshProUGUI DeliveryTargetText;
@@ -92,9 +102,13 @@ public class ScoreManager : MonoBehaviour
 		OnDeliveryCountChanged = delegate { };
 
 		OnScoreChanged += (score) => ScoreText.text = score.ToString();
-        OnScoreChanged?.Invoke(0);
-        OnDeliveryCountChanged += (count) => DeliveryTargetText.text = $"¡¤Delivery:({count}/{TargetDeliveryNumber})";
-        OnDeliveryCountChanged += OverGame;
+        OnScoreChanged?.Invoke(0);      
+        if (VictoryConditions == VictioryType.DeliveryNumber)
+        {
+			OnDeliveryCountChanged += (count) => DeliveryTargetText.text = $"¡¤Delivery:({count}/{TargetDeliveryNumber})";
+			OnDeliveryCountChanged += OverGame;
+		}
+        
         OnDeliveryCountChanged?.Invoke(0);    
         
     }
@@ -104,6 +118,18 @@ public class ScoreManager : MonoBehaviour
     {
         Timer += Time.deltaTime;
         TimeText.text =Timer.ToString("#");
-    }
+
+        if (VictoryConditions == VictioryType.DeliveryPosition)
+        {
+			var distance = Vector3.Distance(PlayerTransfrom.position, TargetDeliveryPosiition.position);
+			DeliveryTargetText.text = $"¡¤Target Distance:{distance:#}";
+
+			if (distance <= 10 && !PauseGame.IsPause)
+			{
+				OverGame(0);
+			}
+		}
+
+	}
 
 }

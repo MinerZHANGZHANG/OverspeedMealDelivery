@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Takeway : MonoBehaviour
 {
+	private AudioSource m_deliveryAudio;
 	public GameObject DeliveryEffectPrefab;
 	public GameObject DisappearEffectPrefab;
 	private bool m_isDisappearing=false;
@@ -12,6 +13,7 @@ public class Takeway : MonoBehaviour
 	private void Start()
 	{
 		Destroy(gameObject,10f);
+		m_deliveryAudio=GameObject.FindGameObjectWithTag("DeliveryAudio").GetComponent<AudioSource>();
 	}
 
 
@@ -19,6 +21,7 @@ public class Takeway : MonoBehaviour
 	{
 		if (collision.collider.CompareTag("Client"))
 		{
+			m_deliveryAudio.Play();
 			m_isDisappearing = true;
 			var effect= Instantiate(DeliveryEffectPrefab);
 			effect.transform.position=transform.position;

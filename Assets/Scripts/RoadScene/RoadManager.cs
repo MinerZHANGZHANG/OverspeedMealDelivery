@@ -7,7 +7,6 @@ public class RoadManager : MonoBehaviour
     public List<GameObject> RoadList = new(4);
 
     public float SingleRoadLength = 250;
-    private float MovePositionX = 0;
     void Start()
     {
         SetRoadIndex();
@@ -21,12 +20,6 @@ public class RoadManager : MonoBehaviour
                 }
             };
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SwapRoad()

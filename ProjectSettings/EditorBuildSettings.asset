@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GreenPlayScene.unity
     guid: 190cdcafcf1f64e47be1fc972d7a77b6
+  - enabled: 1
+    path: Assets/Scenes/LongRoadScene.unity
+    guid: dd338c4a77794354d8e88e26461090b2
   m_configObjects: {}

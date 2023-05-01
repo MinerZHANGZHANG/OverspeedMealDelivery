@@ -19,11 +19,10 @@ public class NextScene : MonoBehaviour
 	}
 
 	IEnumerator LoadScene()
-    {
-		
+    {		
 		Camera.main.transform.DOMove(CameraEndPoint.position, 1f);
         CanvasGroup.DOFade(0, 0.5f);
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(0.5f);
 		SceneManager.LoadSceneAsync(SceneName);
 
 	}

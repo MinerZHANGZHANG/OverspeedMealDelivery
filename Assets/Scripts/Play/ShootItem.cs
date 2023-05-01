@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(LineRenderer))]
 public class ShootItem : MonoBehaviour
 {
+    public AudioSource ShootAudio;
+    public AudioSource GetPropAudio;
     public LayerMask LayerMask;
 
     public List<GameObject> ItemList = new();
@@ -38,43 +40,47 @@ public class ShootItem : MonoBehaviour
     {
         if (PauseGame.IsPause)
         {
-			Cursor.SetCursor(PauseCursor, Vector2.zero, CursorMode.Auto);
+			Vector2 offset = new(PauseCursor.width / 2, PauseCursor.height / 2);
+			Cursor.SetCursor(PauseCursor, offset, CursorMode.Auto);
 			return;
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit,LayerMask))
-        {
-            m_position= hit.point;
-            if(hit.collider.CompareTag("Client"))
-            {
-                Cursor.SetCursor(ShootCursor,Vector2.zero, CursorMode.Auto);
+		if (Physics.Raycast(ray, out RaycastHit hit, LayerMask))
+		{
+			m_position = hit.point;
+			if (hit.collider.CompareTag("Client"))
+			{
+                Vector2 offset=new(ShootCursor.width/2 ,ShootCursor.height/2);
+				Cursor.SetCursor(ShootCursor, offset, CursorMode.Auto);
 			}
-            else if (hit.collider.CompareTag("Prop"))
-            {
-                Cursor.SetCursor(GetCursor,Vector2.zero, CursorMode.Auto);
-                GetProp(hit.collider.gameObject);
-            }
-            else
-            {
-                Cursor.SetCursor(AimCursor,Vector2.zero, CursorMode.Auto);
-            }
+			else if (hit.collider.CompareTag("Prop"))
+			{
+				Vector2 offset = new(GetCursor.width / 2, GetCursor.height / 2);
+				Cursor.SetCursor(GetCursor, offset, CursorMode.Auto);
+				GetProp(hit.collider.gameObject);
+			}
+			else
+			{
+				Vector2 offset = new(AimCursor.width / 2, AimCursor.height / 2);
+				Cursor.SetCursor(AimCursor, offset, CursorMode.Auto);
+			}
 
-        }
-        else
-        {
-            m_position = ray.GetPoint(1000f);
+		}
+		else
+		{
+			m_position = ray.GetPoint(1000f);
 		}
 
-        if (Input.GetKey(KeyCode.Mouse0))
+		if (Input.GetKey(KeyCode.Mouse0))
         {
 			EnergyScrollbar.size=Mathf.Clamp01(EnergyScrollbar.size + StorageSpeed * Time.deltaTime);
             ScrollbarHandleImage.color = new(1, 1 - EnergyScrollbar.size, 0);
-            if (EnergyScrollbar.size >= 0.9&&!m_tweener.IsPlaying())
-            {
-                m_tweener.Play();
-            }
+
         }
+		if (EnergyScrollbar.size >= 0.9 && !m_tweener.IsPlaying())
+		{
+			m_tweener.Play();
+		}
 
 		if (Input.GetKeyUp(KeyCode.Mouse0))
 		{           
@@ -93,6 +99,7 @@ public class ShootItem : MonoBehaviour
 
     void ShootRandomItem(Vector3 position)
     {
+        ShootAudio.Play();
         var bullet = Instantiate(ItemList[Random.Range(0, ItemList.Count)]);
         bullet.transform.position = transform.position;
         bullet.transform.LookAt(position);
@@ -107,6 +114,7 @@ public class ShootItem : MonoBehaviour
 
     void GetProp(GameObject prop)
     {
+        GetPropAudio.Play();
         prop.tag = "Untagged";
 
         m_lineRenderer.enabled = true;
@@ -118,11 +126,13 @@ public class ShootItem : MonoBehaviour
 
     IEnumerator MoveToSelf(GameObject item)
     {
+        float speed = 5f;
         while (Vector3.Distance(item.transform.position, transform.position) >= 1)
         {
             item.transform.LookAt(transform);
-            item.transform.Translate(10 * Time.deltaTime * Vector3.forward, Space.Self);
+            item.transform.Translate(speed * Time.deltaTime * Vector3.forward, Space.Self);
 			m_lineRenderer.SetPosition(1, item.transform.position);
+            speed += 3f*Time.deltaTime;
 			yield return null;
         }
 		m_lineRenderer.enabled = false;

@@ -52,4 +52,41 @@ public class GenerateClient : MonoBehaviour
 			return false;
 		}
 	}
+
+
+	public bool GenerateNewClient(float generateRate)
+	{
+		if(m_client== null)
+		{
+
+			timer = Time.realtimeSinceStartup;
+			switch (Type)
+			{
+				case ClientType.OnGround:
+					m_client = Instantiate(OnGroundClientPrefab, transform, true);
+					break;
+				case ClientType.AtWindow:
+					m_client = Instantiate(AtWindowClientPrefab, transform, true);
+					break;
+				default:
+					m_client = Instantiate(OnGroundClientPrefab, transform, true);
+					Debug.LogError("error client type");
+					break;
+			}
+			m_client.transform.position = transform.position;
+			m_client.transform.rotation = transform.rotation;
+			if (!(Random.value < generateRate))
+			{
+				m_client.SetActive(false);
+			}
+			return true;
+
+		}
+		else
+		{
+			return false;
+		}
+			
+		
+	}
 }

@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1002550540355804742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5876014006311486068}
+  m_Layer: 0
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5876014006311486068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002550540355804742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012565432567971095}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2662144758521044370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4399282627477798019}
+  m_Layer: 0
+  m_Name: Building
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4399282627477798019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662144758521044370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012565432567971095}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8012565430540006556
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8012565431305134154
 Transform:
   m_ObjectHideFlags: 0
@@ -262,6 +324,8 @@ Transform:
   - {fileID: 8012565431018862642}
   - {fileID: 4260722248770671237}
   - {fileID: 8012565431028543375}
+  - {fileID: 4399282627477798019}
+  - {fileID: 5876014006311486068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -291,8 +355,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 0
-  BuildParent: {fileID: 0}
-  ClientParent: {fileID: 0}
+  BuildParent: {fileID: 4399282627477798019}
+  TreeParent: {fileID: 5876014006311486068}
+  BuildingList:
+  - {fileID: 9187727129089328575, guid: 03663dbc7111a3043acee8555710cff9, type: 3}
+  - {fileID: 2405491757758637576, guid: 3236ea79496cc414081788b3a6eedf0d, type: 3}
+  - {fileID: 4330037282275785436, guid: f87bc69fd4cfe954480d5ca4f6a7ea41, type: 3}
+  - {fileID: 5276003693270185019, guid: 5f136cddbe7f3e844aace0a168a8a197, type: 3}
+  - {fileID: 2417755967651655793, guid: dcacf6ccb8f8058489b92c6098c74b64, type: 3}
+  - {fileID: 5074027155345293724, guid: 0b5cf0787fc29134489584213f81ac5e, type: 3}
+  TreeList:
+  - {fileID: 1189279032449667137, guid: b282ed2c4d8e3bc48bc2ab48e1b0c196, type: 3}
+  - {fileID: 903406789985003695, guid: 3590045cefe39b744832e709a2d385ee, type: 3}
+  - {fileID: 9005416615288159769, guid: 43009a096c4da904995e5aa92d9bd671, type: 3}
+  - {fileID: 3553641987922645035, guid: 702a4d6430422814eb38a5be5b452755, type: 3}
+  - {fileID: 3269632307222086107, guid: 0a18f926ee7ef404ea5bd100728dcdee, type: 3}
+  - {fileID: 3269632307222086107, guid: 0a18f926ee7ef404ea5bd100728dcdee, type: 3}
+  - {fileID: 3269632307222086107, guid: 0a18f926ee7ef404ea5bd100728dcdee, type: 3}
+  CarList:
+  - {fileID: 6954700489984219699, guid: 1da88c37f1fd88c47a7ebd6d3fd8b296, type: 3}
+  - {fileID: 3635558899248677866, guid: 453db3913a3e60a45ae7b82459ac0e6c, type: 3}
+  - {fileID: 1091655426562594090, guid: f4db87075864d35429c62586f44d9c23, type: 3}
+  MinBuilding: 5
+  MaxBuilding: 11
+  ClientGenerateRate: 0.5
 --- !u!1001 &8012565430519884675
 PrefabInstance:
   m_ObjectHideFlags: 0
